@@ -11,7 +11,7 @@ body{margin:0;background:var(--bg);color:var(--ink);font:400 1.0625rem/1.7 var(-
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--night);z-index:21}
 a{color:inherit}
 :focus-visible{outline:3px solid var(--larch);outline-offset:3px}
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}.rv{opacity:1;transform:none}}
 
 /* barra */
 .bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.7rem clamp(1rem,4vw,3rem);background:var(--night);color:var(--on-night)}
@@ -22,7 +22,7 @@ a{color:inherit}
 .bar nav a[aria-current="page"]{background:var(--larch);color:#111;opacity:1;font-weight:700}
 
 /* portadas */
-.hero{background:var(--night);color:var(--on-night);padding:clamp(4rem,12vw,9rem) clamp(1rem,4vw,3rem) 0;overflow:hidden}
+.hero{background:var(--night);color:var(--on-night);padding:clamp(4rem,12vw,9rem) clamp(1rem,4vw,3rem) 0;overflow:hidden;position:relative;--py:0}
 .hero.small{padding-top:clamp(3rem,8vw,5rem)}
 .hero h1{margin:0;font:800 clamp(3.4rem,15vw,11rem)/.9 var(--display);letter-spacing:-.04em}
 .hero.small h1{font-size:clamp(2.4rem,8vw,5.5rem);line-height:1}
@@ -38,7 +38,7 @@ a{color:inherit}
 .def p{margin:0;max-width:34rem}
 .def .sub{font:500 1rem var(--display);color:var(--moss);margin-bottom:.4rem}
 .def .cta{margin-top:2rem}
-.pair{position:relative;aspect-ratio:1/1;min-height:20rem}
+.pair{position:relative;aspect-ratio:1/1;min-height:20rem;transform:translateY(calc(var(--py,0) * -.06px))}
 .pair .frame{position:absolute}
 .pair .frame:nth-child(1){inset:0 28% 18% 0}
 .pair .frame:nth-child(2){inset:26% 0 0 38%;border:6px solid var(--bg)}
@@ -76,4 +76,115 @@ footer strong{color:var(--on-night);font-weight:800}
   .def,.cases{grid-template-columns:1fr}
   .index{position:static;display:flex;overflow-x:auto;border:0;padding:0 0 .5rem;gap:.4rem}
   .index a{white-space:nowrap;background:var(--surface);border:1px solid var(--line)}
+}
+
+/* ==================== animaciones ==================== */
+
+/* — entrada de pagina y salida hacia otro enlace — */
+@keyframes pageIn{from{opacity:0}to{opacity:1}}
+body{animation:pageIn .5s ease both}
+body.leaving{opacity:0;transition:opacity .28s ease}
+
+/* — barra de progreso de lectura — */
+.progress{position:fixed;top:0;left:0;z-index:40;width:100%;height:3px;background:linear-gradient(90deg,var(--moss),var(--larch));transform:scaleX(var(--p,0));transform-origin:0 50%;pointer-events:none}
+
+/* — barra superior — */
+@keyframes barIn{from{transform:translateY(-100%)}to{transform:none}}
+.bar{animation:barIn .6s .05s cubic-bezier(.2,.85,.25,1) both}
+@keyframes navIn{from{opacity:0;transform:translateY(-14px) scale(.8)}to{transform:none}}
+.bar nav a{animation:navIn .5s cubic-bezier(.2,.9,.3,1.4) backwards;animation-delay:calc(.3s + var(--i,0) * .08s);transition:background .3s,opacity .3s,transform .3s,color .3s}
+.bar nav a:hover{transform:translateY(-2px) scale(1.06)}
+.bar nav a:active{transform:scale(.94)}
+.bar>a{display:inline-block;transition:transform .35s cubic-bezier(.2,.9,.3,1.5),color .3s}
+.bar>a:hover{transform:scale(1.07) rotate(-1.5deg);color:var(--larch)}
+
+/* — cielo animado de la portada (sol, nubes, pajaros) — */
+@keyframes sunIn{from{opacity:0;transform:scale(.2)}to{opacity:1;transform:scale(1)}}
+@keyframes sunPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.09)}}
+.sun{position:absolute;top:9%;right:6%;width:clamp(38px,6vw,72px);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 35% 32%,#ffe6ad,var(--larch));box-shadow:0 0 70px 16px #e2a8473d;pointer-events:none;animation:sunIn 1.2s .4s backwards,sunPulse 5s 1.8s ease-in-out infinite;translate:0 calc(var(--py,0) * .5px)}
+.sky{position:absolute;inset:0;overflow:hidden;pointer-events:none;translate:0 calc(var(--py,0) * .3px)}
+@keyframes drift{from{transform:translateX(-30vw)}to{transform:translateX(130vw)}}
+@keyframes cloudIn{from{opacity:0}to{opacity:var(--o,.5)}}
+.cloud{position:absolute;background:#ffffff2b;border-radius:99px;animation:drift linear infinite,cloudIn 1.6s both}
+.cloud::before,.cloud::after{content:"";position:absolute;background:inherit;border-radius:50%}
+.cloud::before{width:60%;height:190%;left:12%;top:-95%}
+.cloud::after{width:45%;height:150%;right:14%;top:-65%}
+.cloud.c1{top:15%;width:130px;height:32px;--o:.5;animation-duration:52s;animation-delay:-9s}
+.cloud.c2{top:28%;width:92px;height:22px;--o:.35;animation-duration:74s;animation-delay:-34s}
+.cloud.c3{top:8%;width:110px;height:26px;--o:.4;animation-duration:63s;animation-delay:-48s}
+@keyframes fly{from{transform:translate(-12vw,0)}to{transform:translate(112vw,-9vh)}}
+@keyframes flap{0%,100%{transform:scaleY(1)}50%{transform:scaleY(.3)}}
+.bird{position:absolute;width:24px;height:auto;fill:none;stroke:#c5d3d6;stroke-width:1.8;stroke-linecap:round;animation:fly linear infinite}
+.bird .wing{transform-box:fill-box;transform-origin:center;animation:flap .48s ease-in-out infinite}
+.bird.b1{top:19%;animation-duration:38s}
+.bird.b2{top:33%;width:16px;animation-duration:54s;animation-delay:-22s}
+.hero .sky svg{display:block;width:24px;height:auto;margin:0;position:absolute}
+
+/* — texto de portada — */
+@keyframes ltrIn{from{opacity:0;transform:translateY(.55em) rotate(5deg);filter:blur(7px)}to{opacity:1;transform:none;filter:blur(0)}}
+.hero h1 .ltr{display:inline-block;animation:ltrIn .55s cubic-bezier(.2,.85,.3,1.15) backwards;animation-delay:calc(.15s + var(--i) * .038s);will-change:transform,opacity,filter}
+@keyframes hue{to{filter:hue-rotate(20deg)}}
+.hero h1 span{animation:hue 6s ease-in-out infinite alternate}
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+@keyframes popIn{from{opacity:0;transform:scale(.7)}to{opacity:1;transform:none}}
+.hero p{animation:fadeUp .8s .7s backwards}
+.hero>svg{transform:translateY(calc(var(--py,0) * .22px))}
+.hero>svg path{transform-box:fill-box;animation:rise 1s cubic-bezier(.2,.8,.2,1) both}
+@keyframes rise{from{transform:translateY(55%)}to{transform:none}}
+.hero>svg path:nth-child(1){animation-delay:.45s}
+.hero>svg path:nth-child(2){animation-delay:.6s}
+
+/* — boton CTA — */
+.cta{position:relative;overflow:hidden;transition:transform .3s cubic-bezier(.2,.9,.3,1.5),box-shadow .3s,filter .3s}
+.hero .cta{animation:popIn .6s 1s cubic-bezier(.2,.9,.3,1.6) backwards}
+.cta::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 32%,#ffffffa6 50%,transparent 68%);transform:translateX(-130%);pointer-events:none}
+.cta:hover{transform:translateY(-3px) scale(1.04);box-shadow:0 16px 30px -12px #b9791acc}
+.cta:hover::after{animation:shine .9s ease}
+@keyframes shine{to{transform:translateX(130%)}}
+.cta:active{transform:translateY(0) scale(.96)}
+
+/* — marcos de foto flotantes con parallax y inclinacion — */
+@keyframes floatY{50%{translate:0 -12px}}
+.pair .frame{rotate:calc(var(--rot,0) * 1deg);transition:rotate .35s ease,box-shadow .45s;animation:floatY 7s ease-in-out infinite}
+.pair .frame:nth-child(2){animation-duration:9s;animation-delay:-3.5s}
+.frame::before{content:"";position:absolute;inset:0;background:linear-gradient(115deg,transparent 40%,#ffffff80 50%,transparent 60%);translate:-130% 0;transition:translate .9s ease;pointer-events:none;z-index:1}
+.frame:hover::before{translate:130% 0}
+.frame img{transition:transform .8s cubic-bezier(.2,.8,.25,1)}
+.frame:hover img{transform:scale(1.07)}
+.frame svg{transition:transform .55s cubic-bezier(.2,.9,.3,1.5)}
+.frame:hover svg{transform:scale(1.15) rotate(-5deg)}
+
+/* — revelado al hacer scroll — */
+.rv{opacity:0;transform:translateY(36px);transition:opacity .85s cubic-bezier(.2,.8,.25,1),transform .85s cubic-bezier(.2,.8,.25,1);transition-delay:calc(var(--i,0) * 95ms)}
+.rv.in{opacity:1;transform:none}
+
+/* — tarjetas de casa — */
+.casa{transition:transform .45s cubic-bezier(.2,.8,.25,1),box-shadow .45s,border-color .45s}
+.casa.in:hover{transform:translateY(-7px);box-shadow:0 26px 50px -26px #0a121759;border-color:var(--moss)}
+
+/* — acordeones (details) — */
+details{interpolate-size:allow-keywords;transition:border-color .3s}
+details::details-content{block-size:0;overflow:hidden;opacity:0;transition:block-size .4s cubic-bezier(.2,.8,.25,1),opacity .35s .05s,content-visibility .4s allow-discrete}
+details[open]::details-content{block-size:auto;opacity:1}
+@supports not (interpolate-size:allow-keywords){details[open] p{animation:fadeUp .4s .05s backwards}}
+summary{transition:color .25s,transform .25s}
+summary:hover{color:var(--moss);transform:translateX(5px)}
+summary:active{transform:translateX(5px) scale(.98)}
+summary::after{transition:transform .45s cubic-bezier(.2,.9,.3,1.8)}
+summary:hover::after{transform:scale(1.25)}
+details[open] summary:hover::after{transform:rotate(45deg) scale(1.25)}
+
+/* — chips de contacto — */
+.casa.in .contact a{animation:popIn .5s backwards;animation-delay:calc(.2s + var(--i,0) * .07s)}
+.contact a{transition:transform .3s cubic-bezier(.2,.9,.3,1.5),box-shadow .3s,filter .3s}
+.contact a:hover{transform:translateY(-3px) scale(1.05);box-shadow:0 12px 22px -10px #b9791a80;filter:brightness(1.05)}
+.contact a:active{transform:scale(.96)}
+
+/* — indice lateral — */
+.index a{transition:background .3s,color .3s,transform .35s cubic-bezier(.2,.8,.25,1),box-shadow .3s}
+.index a:hover{transform:translateX(7px)}
+.index a.active{background:var(--surface);color:var(--ink);transform:translateX(7px);box-shadow:inset 3px 0 0 var(--larch)}
+
+@media (max-width:820px){
+  .index a:hover,.index a.active{transform:translateY(-2px);box-shadow:0 6px 14px -8px #0a121733}
 }
