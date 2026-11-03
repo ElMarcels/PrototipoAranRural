@@ -42,10 +42,27 @@
     <p>Es cases ruraus dera Val d’Aran an eth sòn origen enes antigues cases de pagès e cases tradicionaus araneses, ligades ara vida, ara cultura e ara ramaderia dera val. Aué, aguesti espacis permeten conservar e méter en valor eth patrimòni aranés, era sua arquitectura, es tradicions e era connexion damb era natura. Cada casa a era sua pròpia istòria e identitat, e represente ua part dera esséncia dera Val d’Aran.</p>
     <a class="cta" href="cases.html">Descubrís es cases</a>
   </div>
-  <div class="pair">
-    <!-- Sustituye el contenido de cada figure por: <img src="foto.jpg" alt="Descripción"> -->
-    <figure class="frame"><span><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="1.6"/><path d="m4 18 5-5 4 4 3-3 4 4"/></svg>Foto dera val</span></figure>
-    <figure class="frame"><span><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="1.6"/><path d="m4 18 5-5 4 4 3-3 4 4"/></svg>Foto dera val</span></figure>
+  <div class="carousel" role="region" aria-roledescription="carrousel" aria-label="Fotos dera Val d'Aran">
+    <div class="slides">
+      <!-- Para añadir más fotos, copia un bloque <figure class="frame slide"> y pon tu <img>.
+           Ejemplo: <img src="fotos/val-4.jpg" alt="Descripción de la foto"> -->
+      <figure class="frame slide is-active" aria-hidden="false">
+        <span><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="1.6"/><path d="m4 18 5-5 4 4 3-3 4 4"/></svg>Foto dera val 1</span>
+      </figure>
+      <figure class="frame slide" aria-hidden="true">
+        <span><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="1.6"/><path d="m4 18 5-5 4 4 3-3 4 4"/></svg>Foto dera val 2</span>
+      </figure>
+      <figure class="frame slide" aria-hidden="true">
+        <span><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="1.6"/><path d="m4 18 5-5 4 4 3-3 4 4"/></svg>Foto dera val 3</span>
+      </figure>
+    </div>
+    <button class="nav prev" type="button" aria-label="Foto anterior">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 5-7 7 7 7"/></svg>
+    </button>
+    <button class="nav next" type="button" aria-label="Foto seguent">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg>
+    </button>
+    <div class="dots" role="group" aria-label="Seleccionar foto"></div>
   </div>
 </section>
 </main>
