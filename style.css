@@ -38,15 +38,36 @@ a{color:inherit}
 .def p{margin:0;max-width:34rem}
 .def .sub{font:500 1rem var(--display);color:var(--moss);margin-bottom:.4rem}
 .def .cta{margin-top:2rem}
-.pair{position:relative;aspect-ratio:1/1;min-height:20rem;transform:translateY(calc(var(--py,0) * -.06px))}
-.pair .frame{position:absolute}
-.pair .frame:nth-child(1){inset:0 28% 18% 0}
-.pair .frame:nth-child(2){inset:26% 0 0 38%;border:6px solid var(--bg)}
+/* carrousel de fotos: dos capas de imagen que se funden. Nunca se apilan. */
+.carousel{isolation:isolate;touch-action:pan-y;box-shadow:0 30px 60px -38px #0a121780}
+.carousel .carousel-photo{transition:opacity .8s ease;will-change:opacity}
+.carousel::after{content:"";position:absolute;left:0;right:0;bottom:0;height:58%;z-index:1;background:linear-gradient(to top,#0a1217b3,#0a121700);pointer-events:none}
+
+/* pies de foto sobre la imagen */
+.cap{position:absolute;left:1rem;right:1rem;bottom:2.6rem;z-index:2;display:grid;gap:.15rem;text-align:center;color:#fff;text-shadow:0 1px 2px #000000b3,0 3px 14px #00000099;pointer-events:none}
+.cap strong{font:700 clamp(1rem,2.2vw,1.35rem)/1.2 var(--display);letter-spacing:.01em}
+.cap em{font:400 clamp(.8rem,1.7vw,1rem)/1.4 var(--text);font-style:normal;color:#e8eeecdb}
+
+/* flechas laterales */
+.carousel .nav{position:absolute;top:50%;z-index:3;display:grid;place-items:center;width:clamp(2.4rem,4.5vw,3rem);height:clamp(2.4rem,4.5vw,3rem);padding:0;border:1px solid #ffffff33;border-radius:50%;color:#fff;background:#12202ab3;backdrop-filter:blur(6px);cursor:pointer;transform:translateY(-50%);transition:background .3s,color .3s,transform .3s,opacity .3s;opacity:.9}
+.carousel .nav svg{width:1.4rem;height:1.4rem;fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.carousel .nav.prev{left:.8rem}
+.carousel .nav.next{right:.8rem}
+.carousel .nav:hover{background:var(--larch);color:#111;opacity:1;transform:translateY(-50%) scale(1.08)}
+.carousel .nav:active{transform:translateY(-50%) scale(.94)}
+.carousel .nav[hidden],.carousel .dots[hidden]{display:none}
+
+/* indicadores */
+.dots{position:absolute;left:0;right:0;bottom:.85rem;z-index:3;display:flex;justify-content:center;gap:.5rem}
+.dot{position:relative;width:.6rem;height:.6rem;padding:0;border:1px solid #ffffffcc;border-radius:99px;background:#12202a59;box-shadow:0 1px 3px #00000059;cursor:pointer;transition:width .3s,background .3s,border-color .3s,transform .3s}
+.dot::before{content:"";position:absolute;inset:-.55rem}
+.dot:hover{background:#ffffffd9;transform:scale(1.15)}
+.dot.is-active{width:1.6rem;background:var(--larch);border-color:#fff}
 
 /* marcos de foto */
 .frame{margin:0;background:var(--frame);border-radius:1.25rem;overflow:hidden;display:grid;place-items:center;color:var(--muted);position:relative}
 .frame img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.frame span{display:grid;justify-items:center;gap:.4rem;font:500 .9rem var(--display);text-align:center;padding:1rem}
+.frame > span{position:relative;z-index:2;display:grid;justify-items:center;gap:.4rem;font:500 .9rem var(--display);text-align:center;padding:1rem}
 .frame svg{width:2.6rem;height:2.6rem;stroke:currentColor;fill:none;stroke-width:1.5}
 
 /* cases */
@@ -143,16 +164,13 @@ body.leaving{opacity:0;transition:opacity .28s ease}
 @keyframes shine{to{transform:translateX(130%)}}
 .cta:active{transform:translateY(0) scale(.96)}
 
-/* — marcos de foto flotantes con parallax y inclinacion — */
-@keyframes floatY{50%{translate:0 -12px}}
-.pair .frame{rotate:calc(var(--rot,0) * 1deg);transition:rotate .35s ease,box-shadow .45s;animation:floatY 7s ease-in-out infinite}
-.pair .frame:nth-child(2){animation-duration:9s;animation-delay:-3.5s}
+/* — marcos de foto — */
 .frame::before{content:"";position:absolute;inset:0;background:linear-gradient(115deg,transparent 40%,#ffffff80 50%,transparent 60%);translate:-130% 0;transition:translate .9s ease;pointer-events:none;z-index:1}
 .frame:hover::before{translate:130% 0}
 .frame img{transition:transform .8s cubic-bezier(.2,.8,.25,1)}
-.frame:hover img{transform:scale(1.07)}
+.frame:not(.slide):hover img{transform:scale(1.07)}
 .frame svg{transition:transform .55s cubic-bezier(.2,.9,.3,1.5)}
-.frame:hover svg{transform:scale(1.15) rotate(-5deg)}
+.frame:not(.slide):hover svg{transform:scale(1.15) rotate(-5deg)}
 
 /* — revelado al hacer scroll — */
 .rv{opacity:0;transform:translateY(36px);transition:opacity .85s cubic-bezier(.2,.8,.25,1),transform .85s cubic-bezier(.2,.8,.25,1);transition-delay:calc(var(--i,0) * 95ms)}
