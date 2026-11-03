@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" width="1200" height="900" role="img" aria-label="Paisatge de montanhes dera Val d’Aran">
+  <defs>
+    <linearGradient id="sky1" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#cfe3ea"/>
+      <stop offset=".62" stop-color="#e9f0ee"/>
+      <stop offset="1" stop-color="#f2f5f4"/>
+    </linearGradient>
+    <linearGradient id="far1" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#a3bcba"/>
+      <stop offset="1" stop-color="#7e9c99"/>
+    </linearGradient>
+    <linearGradient id="near1" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#5f7f6e"/>
+      <stop offset="1" stop-color="#415b49"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="900" fill="url(#sky1)"/>
+  <circle cx="880" cy="205" r="118" fill="#f5e6c8" opacity=".35"/>
+  <circle cx="880" cy="205" r="84" fill="#f5e6c8"/>
+  <path d="M0 560 190 330 360 470 520 300 700 500 860 350 1040 520 1200 400V900H0Z" fill="url(#far1)"/>
+  <path d="M150 392 190 330 232 378Z" fill="#eef3f2" opacity=".85"/>
+  <path d="M485 356 520 300 557 348Z" fill="#eef3f2" opacity=".85"/>
+  <path d="M1000 448 1040 395 1082 442Z" fill="#eef3f2" opacity=".8"/>
+  <path d="M0 660 170 540 330 640 500 520 690 660 880 560 1060 660 1200 590V900H0Z" fill="url(#near1)"/>
+  <path d="M0 762Q300 700 600 760T1200 738V900H0Z" fill="#39503f"/>
+  <path d="M0 820Q320 772 640 822T1200 800V900H0Z" fill="#2f4436"/>
+  <g fill="#2c4335">
+    <path d="M180 760 210 640 240 760Z"/>
+    <path d="M170 715 210 600 250 715Z"/>
+    <path d="M205 790 235 690 265 790Z"/>
+    <path d="M940 755 970 630 1000 755Z"/>
+    <path d="M930 705 970 585 1010 705Z"/>
+    <path d="M965 790 995 680 1025 790Z"/>
+    <path d="M430 795 456 700 482 795Z"/>
+  </g>
+  <path d="M560 900Q600 800 690 780T820 700" fill="none" stroke="#a8c7c9" stroke-width="26" stroke-linecap="round" opacity=".9"/>
+</svg>

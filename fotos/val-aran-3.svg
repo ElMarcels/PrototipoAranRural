@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" width="1200" height="900" role="img" aria-label="Bòsqui, aigua e prats dera Val d’Aran">
+  <defs>
+    <linearGradient id="sky3" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#c9dfe4"/>
+      <stop offset=".58" stop-color="#e7efec"/>
+      <stop offset="1" stop-color="#f3f5f0"/>
+    </linearGradient>
+    <linearGradient id="hill3" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#7e9d7a"/>
+      <stop offset="1" stop-color="#5b7a55"/>
+    </linearGradient>
+    <linearGradient id="water3" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#b6d3d6"/>
+      <stop offset="1" stop-color="#8fb4b8"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="900" fill="url(#sky3)"/>
+  <circle cx="930" cy="180" r="70" fill="#f5e6c8"/>
+  <path d="M0 480 240 280 430 430 610 250 800 430 990 300 1200 470V900H0Z" fill="#9db3a4"/>
+  <path d="M0 560Q240 500 480 550T960 520T1200 540V900H0Z" fill="url(#hill3)"/>
+  <path d="M120 900Q300 720 540 690T900 560T1200 500" fill="none" stroke="url(#water3)" stroke-width="120" stroke-linecap="round"/>
+  <path d="M120 900Q300 720 540 690T900 560T1200 500" fill="none" stroke="#e8f1f0" stroke-width="10" stroke-linecap="round" opacity=".65"/>
+  <g fill="#2f4a38">
+    <path d="M120 640 165 500 210 640Z"/>
+    <path d="M100 596 165 450 230 596Z"/>
+    <path d="M300 700 344 560 388 700Z"/>
+    <path d="M282 650 344 505 406 650Z"/>
+    <path d="M880 620 924 480 968 620Z"/>
+    <path d="M860 570 924 425 988 570Z"/>
+    <path d="M1010 660 1052 525 1094 660Z"/>
+    <path d="M995 612 1052 470 1109 612Z"/>
+    <path d="M640 640 680 520 720 640Z"/>
+    <path d="M625 598 680 470 735 598Z"/>
+  </g>
+  <g fill="#3e5c46">
+    <path d="M40 760 84 630 128 760Z"/>
+    <path d="M1120 760 1164 630 1208 760Z"/>
+  </g>
+  <path d="M0 820Q280 770 560 815T1200 795V900H0Z" fill="#3f5b3a"/>
+  <g fill="#f5e6c8" opacity=".9">
+    <circle cx="250" cy="800" r="6"/>
+    <circle cx="300" cy="820" r="5"/>
+    <circle cx="760" cy="800" r="6"/>
+    <circle cx="820" cy="825" r="5"/>
+  </g>
+</svg>
