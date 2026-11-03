@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=Source+Serif+4:wght@400;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=20261103c">
+<link rel="stylesheet" href="style.css?v=20261103d">
 </head>
 <body>
 <header class="bar">
@@ -47,9 +47,9 @@
     <!-- Dos capas de imagen que se funden entre si. Nunca hay tres fotos: solo estas dos capas,
          y una de ellas siempre esta transparente. -->
     <img class="carousel-photo" src="fotos/val-aran-1.svg" alt="Paisatge de montanhes dera Val d’Aran"
-         style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;transition:opacity .8s ease">
+         style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;z-index:1;transition:opacity .9s ease,transform .9s ease">
     <img class="carousel-photo" alt="" aria-hidden="true"
-         style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .8s ease">
+         style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;z-index:1;opacity:0;transition:opacity .9s ease,transform .9s ease">
     <div class="cap"><strong>Era Val d’Aran</strong><em>Paisatges e montanhes</em></div>
     <button class="nav prev" type="button" aria-label="Foto anterior">
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 5-7 7 7 7"/></svg>
@@ -67,11 +67,11 @@
              data-title="Era Val d’Aran" data-text="Paisatges e montanhes">
       </figure>
       <figure>
-        <img src="fotos/val-aran-2.svg" alt="Casa de pagès tradicionau damb montanhes ath fons"
+        <img src="fotos/selt-fondo1.png" alt="Casa de pagès tradicionau damb montanhes ath fons"
              data-title="Cases de pagès" data-text="Architectura tradicionau">
       </figure>
       <figure>
-        <img src="fotos/val-aran-3.svg" alt="Bòsqui, aigua e prats dera Val d’Aran"
+        <img src="fotos/selt-fondo2.png" alt="Bòsqui, aigua e prats dera Val d’Aran"
              data-title="Natura e tradicion" data-text="Bòsqui, aigua e ramaderia">
       </figure>
     </div>
@@ -79,6 +79,6 @@
 </section>
 </main>
 <footer><strong>AranRural</strong> · Associacion de cases pagés ena Val d’Aran</footer>
-<script src="anim.js?v=20261103c" defer></script>
+<script src="anim.js?v=20261103d" defer></script>
 </body>
 </html>
