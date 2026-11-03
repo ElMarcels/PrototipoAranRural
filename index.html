@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=Source+Serif+4:wght@400;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css?v=20261103b">
 </head>
 <body>
 <header class="bar">
@@ -44,16 +44,20 @@
   </div>
   <div class="carousel" role="region" aria-roledescription="carrousel" aria-label="Fotos dera Val d'Aran">
     <div class="slides">
-      <!-- UN slide = UNA foto. Para añadir otra, copia un bloque <figure> completo.
-           También puedes pegar imágenes sueltas aquí: cada <img> se convierte en un slide. -->
-      <figure class="frame slide is-active" aria-hidden="false">
-        <span><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="1.6"/><path d="m4 18 5-5 4 4 3-3 4 4"/></svg>Foto dera val 1</span>
+      <!-- Una foto = un <figure class="slide">.
+           Solo el que tiene la clase "is-active" se ve; el resto lleva "hidden".
+           Para añadir una foto, copia un <figure> entero y cambia src, alt y el pie. -->
+      <figure class="slide is-active" role="group" aria-roledescription="foto" aria-label="1 de 3" aria-hidden="false">
+        <img src="fotos/val-aran-1.svg" alt="Paisatge de montanhes dera Val d’Aran">
+        <figcaption class="cap"><strong>Era Val d’Aran</strong><em>Paisatges e montanhes</em></figcaption>
       </figure>
-      <figure class="frame slide" aria-hidden="true">
-        <span><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="1.6"/><path d="m4 18 5-5 4 4 3-3 4 4"/></svg>Foto dera val 2</span>
+      <figure class="slide" role="group" aria-roledescription="foto" aria-label="2 de 3" aria-hidden="true" hidden>
+        <img src="fotos/val-aran-2.svg" alt="Casa de pagès tradicionau damb montanhes ath fons">
+        <figcaption class="cap"><strong>Cases de pagès</strong><em>Architectura tradicionau</em></figcaption>
       </figure>
-      <figure class="frame slide" aria-hidden="true">
-        <span><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="1.6"/><path d="m4 18 5-5 4 4 3-3 4 4"/></svg>Foto dera val 3</span>
+      <figure class="slide" role="group" aria-roledescription="foto" aria-label="3 de 3" aria-hidden="true" hidden>
+        <img src="fotos/val-aran-3.svg" alt="Bòsqui, aigua e prats dera Val d’Aran">
+        <figcaption class="cap"><strong>Natura e tradicion</strong><em>Bòsqui, aigua e ramaderia</em></figcaption>
       </figure>
     </div>
     <button class="nav prev" type="button" aria-label="Foto anterior">
@@ -67,6 +71,6 @@
 </section>
 </main>
 <footer><strong>AranRural</strong> · Associacion de cases pagés ena Val d’Aran</footer>
-<script src="anim.js" defer></script>
+<script src="anim.js?v=20261103b" defer></script>
 </body>
 </html>
