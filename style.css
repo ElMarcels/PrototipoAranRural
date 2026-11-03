@@ -208,10 +208,8 @@ details[open] summary:hover::after{transform:rotate(45deg) scale(1.25)}
   .index a:hover,.index a.active{transform:translateY(-2px);box-shadow:0 6px 14px -8px #0a121733}
 }
 
-/* — vista completa de las fotos al pasar el cursor — */
-.casa .frame img{cursor:zoom-in}
-.photo-preview{position:fixed;inset:0;z-index:60;display:grid;place-items:center;padding:clamp(1rem,4vw,3rem);background:#0a1217d9;backdrop-filter:blur(6px);opacity:0;visibility:hidden;pointer-events:none;transition:opacity .25s ease,visibility .25s ease}
-.photo-preview.show{opacity:1;visibility:visible}
-.photo-preview img{max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain;border-radius:.75rem;box-shadow:0 30px 70px -20px #000c;transform:scale(.96);transition:transform .3s cubic-bezier(.2,.8,.25,1)}
-.photo-preview.show img{transform:scale(1)}
-@media (prefers-reduced-motion:reduce){.photo-preview,.photo-preview img{transition:none}}
+/* — al pasar el cursor, la tarjeta crece para mostrar la foto completa — */
+.casa .frame{transition:aspect-ratio .45s cubic-bezier(.2,.8,.25,1)}
+.casa .frame:hover{aspect-ratio:var(--ar,16/9)}
+.casa .frame:hover img{transform:none}
+@media (prefers-reduced-motion:reduce){.casa .frame{transition:none}}

@@ -157,6 +157,18 @@
     }
   }
 
+  /* la tarjeta crece al pasar el cursor: guarda la proporcion real de cada foto */
+  document.querySelectorAll('.casa .frame img').forEach(img => {
+    const frame = img.closest('.frame');
+    if (!frame) return;
+    const setRatio = () => {
+      if (!img.naturalWidth || !img.naturalHeight) return;
+      frame.style.setProperty('--ar', `${img.naturalWidth} / ${img.naturalHeight}`);
+    };
+    if (img.complete) setRatio();
+    else img.addEventListener('load', setRatio, { once: true });
+  });
+
   if (reduce.matches) return;
 
   /* division del titulo en letras animadas */
