@@ -3,15 +3,19 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#12202a" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0a1217" media="(prefers-color-scheme: dark)">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <title>Aranrural · Cases de pagès ena Val d’Aran</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=Source+Serif+4:wght@400;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=20261103f">
+<link rel="stylesheet" href="style.css?v=20261117a">
 </head>
 <body>
 <header class="bar">
-  <img src="aranrural.png" alt="AranRural Logo" class="logo">
+  <a href="index.html" aria-label="AranRural, inici"><img src="aranrural.png" alt="AranRural Logo" class="logo"></a>
   <nav aria-label="Navegacion">
     <a href="index.html" aria-current="page">Inici</a>
     <a href="cases.html">Es nòstes cases</a>
@@ -28,7 +32,7 @@
     <svg class="bird b2" viewBox="0 0 24 12"><path class="wing" d="M2 8Q7 2 12 8Q17 2 22 8"/></svg>
   </div>
   <img src="aranrural.png" alt="AranRural · Associacion de cases de pagés ena Val d'Aran" class="hero-logo">
-  <svg viewBox="0 0 16  00 600" preserveAspectRatio="none" aria-hidden="true">
+  <svg viewBox="0 0 1600 600" preserveAspectRatio="none" aria-hidden="true">
     <path d="M0 200V120l90-50 80 60 110-95 120 100 90-45 130 85 100-70 120 90 110-80 120 70 130-60V200z" fill="var(--moss)" opacity=".55"/>
     <path d="M0 200v-45l120-30 100 40 140-55 110 50 150-45 120 40 130-45 130 40 100-25 100 30V200z" fill="var(--bg)"/>
   </svg>
@@ -41,14 +45,11 @@
     <p>Es cases ruraus dera Val d’Aran an eth sòn origen enes antigues cases de pagès e cases tradicionaus araneses, ligades ara vida, ara cultura e ara ramaderia dera val. Aué, aguesti espacis permeten conservar e méter en valor eth patrimòni aranés, era sua arquitectura, es tradicions e era connexion damb era natura. Cada casa a era sua pròpia istòria e identitat, e represente ua part dera esséncia dera Val d’Aran.</p>
     <a class="cta" href="cases.html">Descubrís es cases</a>
   </div>
-  <div class="carousel" role="region" aria-roledescription="carrousel" aria-label="Fotos dera Val d’Aran"
-       style="position:relative;width:100%;height:0;padding-bottom:75%;overflow:hidden;border-radius:1.25rem;background:#dfe8e8">
+  <div class="carousel" role="region" aria-roledescription="carrousel" aria-label="Fotos dera Val d’Aran" tabindex="0">
     <!-- Dos capas de imagen que se funden entre si. Nunca hay tres fotos: solo estas dos capas,
          y una de ellas siempre esta transparente. -->
-    <img class="carousel-photo" src="fotos/foto1.png" alt="Paisatge de montanhes dera Val d’Aran"
-         style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;z-index:1;transition:opacity .9s ease,transform .9s ease">
-    <img class="carousel-photo" alt="" aria-hidden="true"
-         style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;z-index:1;opacity:0;transition:opacity .9s ease,transform .9s ease">
+    <img class="carousel-photo" src="fotos/foto1.webp" alt="Paisatge de montanhes dera Val d’Aran" fetchpriority="high" decoding="async">
+    <img class="carousel-photo" alt="" aria-hidden="true" decoding="async">
     <button class="nav prev" type="button" aria-label="Foto anterior">
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 5-7 7 7 7"/></svg>
     </button>
@@ -58,38 +59,39 @@
     <div class="dots" role="group" aria-label="Seleccionar foto"></div>
 
     <!-- Lista de fotos. Esto NO se ve: solo son los datos del carrusel.
-         Para añadir una foto, copia un <figure> entero y cambia src, alt, data-title y data-text. -->
+         Se usa data-src (no src) para no descargar las fotos hasta que se muestran.
+         Para añadir una foto, copia un <figure> entero y cambia data-src, alt, data-title y data-text. -->
     <div class="carousel-data" hidden>
       <figure>
-        <img src="fotos/foto1.png" alt="Foto 1"
+        <img data-src="fotos/foto1.webp" alt="Foto 1"
              data-title="Era Val d’Aran" data-text="Foto 1">
       </figure>
       <figure>
-        <img src="fotos/foto2.png" alt="Foto 2"
+        <img data-src="fotos/foto2.webp" alt="Foto 2"
              data-title="Cases de pagès" data-text="Foto 2">
       </figure>
       <figure>
-        <img src="fotos/foto3.png" alt="Foto 3"
+        <img data-src="fotos/foto3.webp" alt="Foto 3"
              data-title="Natura e tradicion" data-text="Foto 3">
       </figure>
       <figure>
-        <img src="fotos/foto4.webp" alt="Foto 4"
+        <img data-src="fotos/foto4.webp" alt="Foto 4"
              data-title="Natura e tradicion" data-text="Foto 4">
       </figure>
       <figure>
-        <img src="fotos/foto5.jpg" alt="Foto 5"
+        <img data-src="fotos/foto5.jpg" alt="Foto 5"
              data-title="Natura e tradicion" data-text="Foto 5">
       </figure>
       <figure>
-        <img src="fotos/foto6.jpeg" alt="Foto 6"
+        <img data-src="fotos/foto6.jpeg" alt="Foto 6"
              data-title="Natura e tradicion" data-text="Foto 6">
       </figure>
       <figure>
-        <img src="fotos/foto8.webp" alt="Foto 7"
+        <img data-src="fotos/foto8.webp" alt="Foto 7"
              data-title="Natura e tradicion" data-text="Foto 7">
       </figure>
       <figure>
-        <img src="fotos/foto9.jpg" alt="Foto 8"
+        <img data-src="fotos/foto9.jpg" alt="Foto 8"
              data-title="Natura e tradicion" data-text="Foto 8">
       </figure>
     </div>
@@ -97,6 +99,6 @@
 </section>
 </main>
 <footer><strong>AranRural</strong> · Associacion de cases pagés ena Val d’Aran · Web Realitzada per <a href="https://mnartv.es">Marcel Nart Vilches</a> · <a href="https://ruralaran.vercel.app">AranRural</a> © 2026 by <a href="https://example.com">Marcel Nart, Sergi Martí &amp; Arantza Arro</a> is licensed under <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">CC BY-NC-ND 4.0</a><img src="https://mirrors.creativecommons.org/presskit/icons/cc.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"><img src="https://mirrors.creativecommons.org/presskit/icons/by.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"><img src="https://mirrors.creativecommons.org/presskit/icons/nc.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"><img src="https://mirrors.creativecommons.org/presskit/icons/nd.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"></footer>
-<script src="anim.js?v=20261103f" defer></script>
+<script src="anim.js?v=20261117a" defer></script>
 </body>
 </html>

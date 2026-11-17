@@ -14,7 +14,7 @@
   const carousel = document.querySelector('.carousel');
   if (carousel) {
     const photos = [...carousel.querySelectorAll('.carousel-data img')].map(img => ({
-      src: img.getAttribute('src'),
+      src: img.dataset.src || img.getAttribute('src'),
       alt: img.getAttribute('alt') || '',
       title: img.dataset.title || '',
       text: img.dataset.text || ''
@@ -28,9 +28,19 @@
     let index = 0;
     let front = 0;
     let timer = null;
+    const preloaded = new Set();
+    const saveData = navigator.connection?.saveData || false;
 
     if (photos.length && layers.length >= 2) {
-      photos.forEach(p => { const pre = new Image(); pre.src = p.src; });
+      /* en movil solo se descarga la foto siguiente, no todas de golpe */
+      const preloadNext = () => {
+        if (saveData || photos.length < 2) return;
+        const src = photos[(index + 1) % photos.length].src;
+        if (!src || preloaded.has(src)) return;
+        preloaded.add(src);
+        const pre = new Image();
+        pre.src = src;
+      };
 
       /* los puntos se crean automaticamente segun el numero de fotos */
       if (dotsWrap) dotsWrap.replaceChildren();
@@ -60,6 +70,7 @@
         /* +1 = entra desde la derecha, -1 = entra desde la izquierda */
         const dir = index === previous ? 1 : (n >= previous ? 1 : -1);
         mark();
+        preloadNext();
         const photo = photos[index];
         const my = ++token;
         const back = layers[1 - front];
@@ -113,7 +124,7 @@
 
       const restart = () => {
         stop();
-        if (photos.length > 1) timer = setInterval(() => show(index + 1), every);
+        if (photos.length > 1 && !reduce.matches) timer = setInterval(() => show(index + 1), every);
       };
 
       if (photos.length < 2) {
@@ -135,6 +146,7 @@
       let startX = null;
       carousel.addEventListener('pointerdown', e => {
         if (e.pointerType === 'mouse' && e.button !== 0) return;
+        if (e.target.closest('button')) { startX = null; return; }
         startX = e.clientX;
       });
       carousel.addEventListener('pointerup', e => {
@@ -153,6 +165,7 @@
       });
 
       mark();
+      preloadNext();
       restart();
     }
   }
@@ -235,14 +248,21 @@
     const y = scrollY;
     const max = document.documentElement.scrollHeight - innerHeight;
     progress.style.setProperty('--p', max > 0 ? (y / max).toFixed(4) : 0);
-    heroes.forEach(h => h.style.setProperty('--py', Math.min(y, h.offsetHeight).toFixed(1)));
+    /* el parallax solo en escritorio con raton: en tacto ahorra bateria y evita tirones */
+    if (innerWidth > 820 && matchMedia('(pointer:fine)').matches) {
+      heroes.forEach(h => h.style.setProperty('--py', Math.min(y, h.offsetHeight).toFixed(1)));
+    } else {
+      heroes.forEach(h => h.style.removeProperty('--py'));
+    }
   };
 
-  addEventListener('scroll', () => {
+  const scheduleUpdate = () => {
     if (ticking) return;
     ticking = true;
     requestAnimationFrame(update);
-  }, { passive: true });
+  };
+  addEventListener('scroll', scheduleUpdate, { passive: true });
+  addEventListener('resize', scheduleUpdate, { passive: true });
   update();
 
   /* indice lateral: resaltado segun la seccion visible */
