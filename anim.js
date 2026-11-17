@@ -282,6 +282,50 @@
     });
   }
 
+  /* visor de fotos: boton para ampliar en movil y tablet (donde no hay hover) */
+  const zoomables = [...document.querySelectorAll('.casa .frame img')];
+  if (zoomables.length && typeof HTMLDialogElement === 'function') {
+    const box = document.createElement('dialog');
+    box.className = 'lightbox';
+    box.setAttribute('aria-label', 'Foto ampliada');
+    box.innerHTML =
+      '<button type="button" class="lightbox-close" aria-label="Tancar">' +
+        '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>' +
+      '</button>' +
+      '<img alt="" decoding="async">' +
+      '<p class="lightbox-cap"></p>';
+    document.body.append(box);
+
+    const big = box.querySelector('img');
+    const cap = box.querySelector('.lightbox-cap');
+    const lock = on => document.documentElement.classList.toggle('has-lightbox', on);
+
+    const open = img => {
+      big.src = img.currentSrc || img.src;
+      big.alt = img.alt || '';
+      cap.textContent = img.alt || '';
+      lock(true);
+      box.showModal();
+    };
+
+    zoomables.forEach(img => {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'zoom';
+      btn.setAttribute('aria-label', 'Ampliar foto: ' + (img.alt || 'casa'));
+      btn.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m16.5 16.5 4.5 4.5M11 8v6M8 11h6"/></svg>';
+      btn.addEventListener('click', () => open(img));
+      img.closest('.frame').append(btn);
+    });
+
+    box.querySelector('.lightbox-close').addEventListener('click', () => box.close());
+    box.addEventListener('click', e => { if (e.target === box) box.close(); });
+    box.addEventListener('close', () => {
+      big.removeAttribute('src');
+      lock(false);
+    });
+  }
+
   /* desvanecimiento suave al navegar a otra pagina */
   addEventListener('click', e => {
     const a = e.target.closest('a');
